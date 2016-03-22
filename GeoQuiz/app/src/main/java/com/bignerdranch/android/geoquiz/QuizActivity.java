@@ -20,6 +20,7 @@ public class QuizActivity extends AppCompatActivity {
     private Button mFalseButton;
     private Button mNextButton;
     private Button mPrevButton;
+    private Button mCheatButton;
     private TextView mQuestionTextView;
     private Question[] mQuestionBank = new Question[]{
             new Question(R.string.question_oceans, true),
@@ -88,7 +89,15 @@ public class QuizActivity extends AppCompatActivity {
         mFalseButton = (Button) findViewById(R.id.false_button);
         mPrevButton = (Button) findViewById(R.id.prev_button);
         mNextButton = (Button) findViewById(R.id.next_button);
+        mCheatButton = (Button) findViewById(R.id.cheat_button);
 
+        mCheatButton.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    // Start Cheat Activity
+                }
+            }
+        );
         mNextButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +116,7 @@ public class QuizActivity extends AppCompatActivity {
         });
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
 
-        mTrueButton.setOnClickListener(new OnClickListener(){
+        mTrueButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkAnswer(true);
