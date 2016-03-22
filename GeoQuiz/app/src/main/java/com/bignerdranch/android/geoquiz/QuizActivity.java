@@ -31,6 +31,7 @@ public class QuizActivity extends AppCompatActivity {
     private int mCurrentIndex = 0;
 
     private static final String TAG = "QuizActivity";
+    private static final String KEY_INDEX = "index";
 
     @Override
     public void onStart() {
@@ -58,6 +59,13 @@ public class QuizActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "onDestroy() called");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        Log.d(TAG, "onSaveInstanceState(Bundle outState)");
+        savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
     }
 
     @Override
@@ -107,12 +115,14 @@ public class QuizActivity extends AppCompatActivity {
 
         });
 
-        mFalseButton.setOnClickListener(new OnClickListener(){
+        mFalseButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 checkAnswer(false);
             }
         });
+        if(savedInstanceState != null)
+            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
         updateQuestion();
     }
 
