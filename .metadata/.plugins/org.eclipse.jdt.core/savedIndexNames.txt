@@ -1,0 +1,4 @@
+INDEX VERSION 1.126+/home/krogers/Development/android/BNRBook/.metadata/.plugins/org.eclipse.jdt.core
+607448586.index
+2733052065.index
+3628347857.index
