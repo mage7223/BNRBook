@@ -1,5 +1,6 @@
 package com.bignerdranch.android.criminalintent;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -18,6 +19,9 @@ import java.util.UUID;
  * Created by krogers on 3/23/16.
  */
 public class CrimeFragment extends Fragment {
+
+    private static final String ARG_CRIME_ID = "crime_id";
+
     private Crime mCrime;
     private EditText mTitleField;
     private Button mDateButton;
@@ -26,8 +30,8 @@ public class CrimeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        UUID crimeId = (UUID) getActivity().getIntent()
-                .getSerializableExtra(CrimeActivity.EXTRA_CRIME_ID);
+        UUID crimeId = (UUID) getArguments()
+                .getSerializable(ARG_CRIME_ID);
         mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
     }
 
@@ -70,5 +74,17 @@ public class CrimeFragment extends Fragment {
         });
 
         return v;
+    }
+
+    public void returnResult() {
+        getActivity().setResult(Activity.RESULT_OK, null);
+    }
+
+    public static CrimeFragment newInstance(UUID crimeId) {
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_CRIME_ID, crimeId);
+        CrimeFragment fragment = new CrimeFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 }
